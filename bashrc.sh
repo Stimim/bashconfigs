@@ -14,7 +14,7 @@ load_plugins() {
   done
 }
 
-load_plugins history.bash
+load_plugins history.bash aliases.bash
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -41,8 +41,6 @@ unset color_prompt force_color_prompt
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
   alias ls='ls --color=auto'
-  #alias dir='dir --color=auto'
-  #alias vdir='vdir --color=auto'
 
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
@@ -51,9 +49,6 @@ fi
 
 alias rm='rm -I'
 
-alias ptt='ssh -C bbs@ptt.cc'
-alias ptt2='ssh -C bbs@ptt2.cc'
-alias Nethack='ssh nethack@alt.org'
 # some more ls aliases
 #alias ll='ls -l'
 #alias la='ls -A'
