@@ -15,6 +15,12 @@ else
   NOR=
 fi
 
+get_fuzzy_path() {
+  local p=${PWD/#$HOME/\~}
+  #p=$(echo $p | sed '/^\(\/.\+\|~\)\/.*\/\(.*\)\/\(.*\)$/s//\1\/\.\.\.\/\2\/\3/')
+  p=$(echo $p | sed '/\(\/\?.\)[^\/]*\//s//\1\//g')
+  echo ${BLU}$p${NOR}
+}
 
 get_git_branch() {
   local branch=$(git branch 2>/dev/null | sed -n '/\* /s///p')
@@ -39,6 +45,6 @@ PROMPT_COMMAND=gen_prompt
 
 gen_prompt() {
   PS1=$PS1_debian_chroot
-  PS1=$PS1$PS1_user'@'$PS1_host':'$PS1_dir'\n'
-  PS1=$PS1$(get_git_branch)'\$ '
+  PS1=$PS1$PS1_user'@'$PS1_host':'$(get_fuzzy_path)' '$(get_git_branch)
+  PS1=$PS1'\n\$ '
 }
