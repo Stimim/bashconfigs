@@ -40,7 +40,7 @@ PS1_user=$GRN'\u'$NOR
 PS1_host=$YEL'\h'$NOR
 PS1_dir=$BLU'\W'$NOR
 
-PROMPT_COMMAND=gen_prompt
+PROMPT_COMMAND="gen_prompt; $PROMPT_COMMAND"
 
 gen_prompt() {
   PS1=$PS1_debian_chroot

@@ -17,7 +17,6 @@ L_HISTORY="$HOME/.$$_history"
 
 G_HISTORY_TMP="$HOME/.bash_history.$$"
 
-PROMPT_COMMAND=prompt_command
 
 touch $L_HISTORY
 
@@ -48,13 +47,13 @@ show_global_history() {
   history -r $L_HISTORY
 }
 
-prompt_command() {
-  history -a
+log_history() {
+  history -a $L_HISTORY
   cat $G_HISTORY $L_HISTORY | sed '$!N;s/\n/ /' | tac | \
     sort -k2 -u | sort -k1 | sed 's/ /\n/' > ${G_HISTORY_TMP}
   mv ${G_HISTORY_TMP} $G_HISTORY
   history -c
-  history -r
+  history -r $L_HISTORY
 }
 
 clear_process_history() {
@@ -68,3 +67,5 @@ clear_global_history() {
 
 # remove $L_HISTORY on exit
 trap clear_process_history EXIT
+
+PROMPT_COMMAND="log_history; $PROMPT_COMMAND"
