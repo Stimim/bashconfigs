@@ -42,8 +42,14 @@ PS1_dir=$BLU'\W'$NOR
 
 PROMPT_COMMAND="gen_prompt; $PROMPT_COMMAND"
 
+set_title() {
+  echo -ne "\033]0;$1\007"
+}
+
 gen_prompt() {
   PS1=$PS1_debian_chroot
   PS1=$PS1$PS1_user'@'$PS1_host':'$(get_git_branch)$(get_fuzzy_path)
   PS1=$PS1'\n\$ '
+
+  set_title "${USER}@${HOSTNAME}: ${PWD/$HOME/~}"
 }
