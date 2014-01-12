@@ -11,6 +11,8 @@ HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+# force commands more than one line join to one line
+shopt -s cmdhist
 
 G_HISTORY="$HOME/.bash_history"
 G_HISTORY_SIZE=5000
@@ -29,6 +31,7 @@ alias glh=grep_local_history
 alias ggh=grep_global_history
 
 grep_global_history() {
+  log_history
   history -c
   history -r $G_HISTORY
   history | grep $*
@@ -41,6 +44,7 @@ grep_local_history() {
 }
 
 show_global_history() {
+  log_history
   history -c
   history -r $G_HISTORY
   history
