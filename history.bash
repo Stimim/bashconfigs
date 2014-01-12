@@ -13,6 +13,7 @@ HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 shopt -s histappend
 
 G_HISTORY="$HOME/.bash_history"
+G_HISTORY_SIZE=5000
 L_HISTORY="$HOME/.$$_history"
 
 G_HISTORY_TMP="$HOME/.bash_history.$$"
@@ -50,7 +51,7 @@ show_global_history() {
 log_history() {
   history -a $L_HISTORY
   cat $G_HISTORY $L_HISTORY | sed '$!N;s/\n/ /' | tac | \
-    sort -k2 -u | sort -k1 | sed 's/ /\n/' > ${G_HISTORY_TMP}
+    sort -k2 -u | sort -k1 | tail -n $G_HISTORY_SIZE | sed 's/ /\n/' > ${G_HISTORY_TMP}
   mv ${G_HISTORY_TMP} $G_HISTORY
   history -c
   history -r $L_HISTORY
