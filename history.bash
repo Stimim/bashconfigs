@@ -54,8 +54,8 @@ show_global_history() {
 
 log_history() {
   history -a $L_HISTORY
-  cat $G_HISTORY $L_HISTORY | sed '$!N;s/\n/ /' | tac | \
-    sort -k2 -u | sort -k1 | tail -n $G_HISTORY_SIZE | sed 's/ /\n/' > ${G_HISTORY_TMP}
+  cat $G_HISTORY $L_HISTORY | sed '$!N;s/\n/%/' | tac | \
+    sort -k2 -u | sort -k1 | tail -n $G_HISTORY_SIZE | sed 's/%/\n/' > ${G_HISTORY_TMP}
   mv ${G_HISTORY_TMP} $G_HISTORY
   history -c
   history -r $L_HISTORY
