@@ -35,7 +35,6 @@ get_git_branch() {
   fi
 }
 
-PS1_debian_chroot='${debian_chroot:+($debian_chroot)}'
 PS1_user=$GRN'\u'$NOR
 PS1_host=$YEL'\h'$NOR
 PS1_dir=$BLU'\W'$NOR
@@ -47,9 +46,9 @@ set_title() {
 }
 
 gen_prompt() {
-  PS1=$PS1_debian_chroot
+  PS1=""
   PS1=$PS1$PS1_user'@'$PS1_host':'$(get_git_branch)$(get_fuzzy_path)
   PS1=$PS1'\n\$ '
 
-  set_title "${USER}@${HOSTNAME}: ${PWD/$HOME/~}"
+  #set_title "${USER}@${HOSTNAME}: ${PWD/$HOME/~}"
 }
