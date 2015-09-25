@@ -17,3 +17,5 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias rm='rm -I'
+
+alias tmux='TERM=xterm-256color tmux'
